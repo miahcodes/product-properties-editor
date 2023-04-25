@@ -83,6 +83,7 @@ const ProductForm = () => {
 
       if (response.ok) {
         setErrorMessage("");
+        setProductType("custom");
         setProperties(data.properties || []);
       } else {
         setErrorMessage(
@@ -98,22 +99,22 @@ const ProductForm = () => {
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold mb-4">Product Properties Editor</h1>
       <form>
-        <div className="mb-4">
-          <label htmlFor="handle" className="block mb-2">
-            Product Handle/Slug
+        <div className="mb-4 flex justify-start align-middle flex-wrap">
+          <label htmlFor="handle" className="py-2 inline-block mb-2 sm:mb-0 sm:mr-2 w-full sm:w-auto">
+            Product Handle:
           </label>
           <input
             type="text"
             id="handle"
             value={handle}
             onChange={(e) => setHandle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
-            placeholder="Enter product handle/slug"
+            className="w-full sm:w-1/4 p-2 border border-gray-300 rounded"
+            placeholder="Enter product handle"
           />
           <button
             type="button"
             onClick={fetchProduct}
-            className="bg-green-500 text-white px-4 py-2 mt-4 rounded mr-4"
+            className="bg-green-500 text-white px-4 py-2 mt-4 sm:mt-0 sm:ml-2 w-full sm:w-auto rounded"
           >
             Fetch Product
           </button>
@@ -123,15 +124,15 @@ const ProductForm = () => {
             </div>
           )}
         </div>
-        <div className="mb-4">
-          <label htmlFor="productType" className="block mb-2">
-            Product Type
+        <div className="mb-4 flex justify-start">
+          <label htmlFor="productType" className="block mr-2 py-2">
+            Product Type:
           </label>
           <select
             id="productType"
             value={productType}
             onChange={(e) => handleProductTypeChange(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full sm:w-auto p-2 border border-gray-300 rounded"
           >
             <option value="furniture">Furniture</option>
             <option value="electronics">Electronics</option>
@@ -139,10 +140,10 @@ const ProductForm = () => {
           </select>
         </div>
         {properties.map((property, index) => (
-          <div key={index} className="mb-4 flex flex-wrap justify-end">
-            <div className="w-full sm:w-1/2 sm:pr-2">
-              <label htmlFor={`property-name-${index}`} className="block mb-1">
-                Name
+          <div key={index} className="mb-4 flex flex-wrap justify-start">
+            <div className="w-full sm:w-auto sm:pr-2 flex">
+              <label htmlFor={`property-name-${index}`} className="block p-0 sm:py-1 mb-1 sm:mb-0 sm:mr-2">
+                Name:
               </label>
               <input
                 type="text"
@@ -151,7 +152,7 @@ const ProductForm = () => {
                 onChange={(e) =>
                   handlePropertyNameChange(index, e.target.value)
                 }
-                className={`w-full p-2 mb-2 border ${
+                className={`w-full p-1 border ${
                   propertyErrors[index]?.name
                     ? "border-red-500"
                     : "border-gray-300"
@@ -159,9 +160,9 @@ const ProductForm = () => {
                 placeholder="Property Name"
               />
             </div>
-            <div className="w-full sm:w-1/2 sm:pl-2">
-              <label htmlFor={`property-value-${index}`} className="block mb-1">
-                Value
+            <div className="w-full sm:w-auto sm:pl-2 flex">
+              <label htmlFor={`property-value-${index}`} className="block p-0 sm:py-1 mb-1 sm:mb-0 sm:mr-2">
+                Value:
               </label>
               <input
                 type="text"
@@ -170,7 +171,7 @@ const ProductForm = () => {
                 onChange={(e) =>
                   handlePropertyValueChange(index, e.target.value)
                 }
-                className={`w-full p-2 border ${
+                className={`w-full p-1 border ${
                   propertyErrors[index]?.value
                     ? "border-red-500"
                     : "border-gray-300"
@@ -181,7 +182,7 @@ const ProductForm = () => {
             <button
               type="button"
               onClick={() => removeProperty(index)}
-              className="ml-2 w-1/12 text-red-500 border border-red-500 py-1 rounded"
+              className="ml-2 mt-4 sm:mt-0 w-full sm:w-1/12 text-red-500 border border-red-500 p-0 rounded"
             >
               Delete
             </button>
